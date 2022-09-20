@@ -1,12 +1,27 @@
 package main
 
 import (
+	"fmt"
 	_ "image/gif"
 	_ "image/jpeg"
 	_ "image/png"
 
 	"github.com/xuri/excelize/v2"
 )
+
+// 单元格定位
+func PositionCell() {
+	col := 2
+	row := 1
+	// 给定列和行，返回单元格信息
+	cell, _ := excelize.CoordinatesToCellName(col, row) // 返回 B2
+	fmt.Printf("第 %v 列，第 %v 行的单元格为 %v\n", col, row, cell)
+
+	// 给定单元格信息，返回单元格所在的列和行
+	cellReq := "C2"
+	colResp, rowResp, _ := excelize.CellNameToCoordinates(cellReq)
+	fmt.Printf("%v 单元格在第 %v 列，第 %v 行\n", cellReq, colResp, rowResp)
+}
 
 func main() {
 	srcFile := "test_files/test.xlsx"
